@@ -1,5 +1,5 @@
 .position{
-    font-size: 50px;
+    font-size: 70px;
     text-align: center;
     height: 100px;
     margin-bottom: 0px;
@@ -21,6 +21,7 @@
 #position0{
     border-bottom: 5px solid black;
     border-right: 5px solid black;
+
 }
 
 #position1{
@@ -106,12 +107,14 @@
     font-size: 75px;
 }
 
-.winMessage{
+.winningMessage{
     margin: auto;
+    text-shadow: 2px 2px red;
 }
 
 .drawMessage{
     margin: auto;
+    text-shadow: 2px 2px white;
 }
 
 header{
@@ -119,6 +122,7 @@ header{
     text-align: center;
     vertical-align: top;
     font-size: 75px;
+    font-family: Georgia, 'Times New Roman', Times, serif
     
 }
 
@@ -126,6 +130,7 @@ h1{
         
     margin-top: 0px;
     margin-bottom: 0px;
+    text-shadow: 2px 2px white;
 }
 body{
     background-color: rgb(30, 121, 30);
