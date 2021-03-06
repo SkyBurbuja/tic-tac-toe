@@ -8,46 +8,47 @@ const player = (name,symbol) => {
     return {name,symbol};
 }
 
-playerOne = player('Miguel','X');
-playerTwo = player('Perez','O');
-let currentPlayer = playerTwo;
+
 
 const gameBoard = (function (){
     //Gameboard Array
     let currentBoard = ['','','','','','','','','',''];
+    playerOne = player('Player One','X');
+    playerTwo = player('Player Two','O');
+    let currentPlayer = playerTwo;
     //Checks for wins
     const gameWon = () => {
 
-        if(currentBoard[4]!=''){
-            if((currentBoard[4]==currentBoard[0] && currentBoard[4]==currentBoard[8])){
+        if(gameBoard.currentBoard[4]!=''){
+            if((gameBoard.currentBoard[4]==gameBoard.currentBoard[0] && gameBoard.currentBoard[4]==gameBoard.currentBoard[8])){
                 return true;
             }
-            if((currentBoard[4]==currentBoard[2] && currentBoard[4]==currentBoard[6])){
+            if((gameBoard.currentBoard[4]==gameBoard.currentBoard[2] && gameBoard.currentBoard[4]==gameBoard.currentBoard[6])){
                 return true;
             }
-            if((currentBoard[4]==currentBoard[1] && currentBoard[4]==currentBoard[7])){
+            if((gameBoard.currentBoard[4]==gameBoard.currentBoard[1] && gameBoard.currentBoard[4]==gameBoard.currentBoard[7])){
                 return true;
             }
-            if((currentBoard[4]==currentBoard[3] && currentBoard[4]==currentBoard[5])){
+            if((gameBoard.currentBoard[4]==gameBoard.currentBoard[3] && gameBoard.currentBoard[4]==gameBoard.currentBoard[5])){
                 return true;
             }
             
         }
 
-        if(currentBoard[0]!=''){
-            if(currentBoard[0]==currentBoard[1] && currentBoard[0]==currentBoard[2]){
+        if(gameBoard.currentBoard[0]!=''){
+            if(gameBoard.currentBoard[0]==gameBoard.currentBoard[1] && gameBoard.currentBoard[0]==gameBoard.currentBoard[2]){
                 return true;
             }
-            if(currentBoard[0]==currentBoard[3] && currentBoard[0]==currentBoard[6]){
+            if(gameBoard.currentBoard[0]==gameBoard.currentBoard[3] && gameBoard.currentBoard[0]==gameBoard.currentBoard[6]){
                 return true;
             }
         }
 
-        if(currentBoard[8]!=''){
-            if((currentBoard[8]==currentBoard[2] && currentBoard[8]==currentBoard[5])){
+        if(gameBoard.currentBoard[8]!=''){
+            if((gameBoard.currentBoard[8]==gameBoard.currentBoard[2] && gameBoard.currentBoard[8]==gameBoard.currentBoard[5])){
                 return true;
             }
-            if((currentBoard[8]==currentBoard[7] && currentBoard[8]==currentBoard[6])){
+            if((gameBoard.currentBoard[8]==gameBoard.currentBoard[7] && gameBoard.currentBoard[8]==gameBoard.currentBoard[6])){
                 return true;
             }
         }
@@ -56,8 +57,8 @@ const gameBoard = (function (){
 
     const gameDraw = () => {
         let notEmpty=0;
-        for(let i=0; i<currentBoard.length; i++){
-            if(currentBoard[i]!=''){
+        for(let i=0; i<gameBoard.currentBoard.length; i++){
+            if(gameBoard.currentBoard[i]!=''){
                 notEmpty++;
             }
         }
@@ -65,25 +66,31 @@ const gameBoard = (function (){
             return true;
         }
     }
-    return{currentBoard,gameWon,gameDraw};
-})();
 
-const displayController = (function (){
-     //Displays gameboard array
-
-    //Updates with every move
     const newMove = () =>{
         const positionToggle = document.querySelectorAll('.position');
         positionToggle.forEach((positon) => positon.addEventListener('click',_addSymbol));
         
-        if(gameBoard.gameWon()){
+        if(gameWon()){
             console.log(currentPlayer.name);
+            const body = document.querySelector('body');
+            const winDiv = document.createElement('div');
+            winDiv.setAttribute('id','message');
+            winDiv.setAttribute('class','winningMessage');
+            winDiv.textContent = `CONGRAGULATIONS ${currentPlayer.name.toUpperCase()} YOU WON!!!`;
+            body.appendChild(winDiv);
         }
 
-        if(gameBoard.gameDraw()){
+        if(gameDraw()&&gameWon()!=true){
             console.log('It is a draw!');
+            const body = document.querySelector('body');
+            const winDiv = document.createElement('div');
+            winDiv.setAttribute('id','message');
+            winDiv.setAttribute('class','drawMessage');
+            winDiv.textContent = `IT IS A DRAW`;
+            body.appendChild(winDiv);
         }
-        _displayBoard(gameBoard);
+        displayController.displayBoard();
         _playerToggle();
         
     }
@@ -94,7 +101,7 @@ const displayController = (function (){
             if(id==`position${i}`){
                 if(currentPlayer.symbol=='X'){
                     if(gameBoard.currentBoard[i]!=''){
-                        playerToggle();
+                        _playerToggle();
                         return;
                     }
                     gameBoard.currentBoard[i]='X';
@@ -102,7 +109,7 @@ const displayController = (function (){
                 
                 if(currentPlayer.symbol=='O'){
                     if(gameBoard.currentBoard[i]!=''){
-                        playerToggle();
+                        _playerToggle();
                         return;
                     }
                     gameBoard.currentBoard[i]='O';
@@ -112,17 +119,6 @@ const displayController = (function (){
 
     }
 
-    const _displayBoard = ()=>{
-        const positions = document.querySelectorAll('.position');
-        _fillBoard(positions);
-    };
-
-    const _fillBoard = (position) =>{
-        for(let i = 0; i<position.length;i++){
-            position[i].textContent = gameBoard.currentBoard[i];
-        }
-    };
-    //Updates display on win
     const _playerToggle = () => {
         
         if(currentPlayer.symbol=='X'){
@@ -137,12 +133,72 @@ const displayController = (function (){
             currentPlayer=playerOne;
         }
     }
-    return {newMove};
+    
+    const reset = () => {
+        gameBoard.currentBoard = ['','','','','','','','','',''];
+        if(document.querySelector('#message')){
+            document.getElementById('message').remove();
+        }
+        displayController.displayBoard();
+    }
+
+    const resetButton = document.querySelector('#restart');
+    resetButton.addEventListener('click',reset);
+    return{currentBoard,newMove,playerOne,playerTwo};
+})();
+
+const displayController = (function (){
+
+    const playerNameChange = (e) =>{
+        if(e.target.id=='playerOneName'){
+            gameBoard.playerOne.name = prompt('What is player one\'s name','Player One');
+            _displayPlayerName();
+        }
+        if(e.target.id=='playerTwoName'){
+            gameBoard.playerTwo.name = prompt('What is player two\'s name','Player Two');
+            _displayPlayerName();
+        }
+    }
+    
+    const _displayPlayerName = () => {
+        const nameOne = document.getElementById('nameOne');
+        const nameTwo = document.getElementById('nameTwo');
+
+        nameOne.textContent=gameBoard.playerOne.name;
+        nameTwo.textContent=gameBoard.playerTwo.name;
+    }
+    
+    
+    const displayBoard = ()=>{
+        const positions = document.querySelectorAll('.position');
+        _displayPlayerName();
+        _fillBoard(positions);
+    };
+
+    const _fillBoard = (position) =>{
+        for(let i = 0; i<position.length;i++){
+            position[i].textContent = gameBoard.currentBoard[i];
+        }
+    };
+
+    const onWin = () => {
+
+    }
+
+    const onDraw = () => {
+
+    }
+
+    const nameChange = document.querySelectorAll('.name');
+    nameChange.forEach(button => button.addEventListener('click',playerNameChange));
+    return {displayBoard,onWin,onDraw};
 })();
 
 
 
-displayController.newMove();
+gameBoard.newMove();
 const updateCheck = document.querySelectorAll('.position');
-updateCheck.forEach((positon,i) => positon.addEventListener('click',displayController.newMove));
+updateCheck.forEach((positon,i) => positon.addEventListener('click',gameBoard.newMove));
+
+
 

@@ -1,12 +1,18 @@
 .position{
-    font-size: 24px;
+    font-size: 50px;
     text-align: center;
-    height: 50px;
+    height: 100px;
+    margin-bottom: 0px;
+}
+
+#restart{
+    border: none;
 }
 
 #container{
     display:grid;
-    grid-template-columns: repeat(3,50px);
+    grid-template-columns: repeat(3,100px);
+    
 
 }
 
@@ -15,6 +21,43 @@
     border-right: 5px solid black;
 }
 
+#position1{
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+}
+
+#position2{
+    border-bottom: 5px solid black;
+}
+
+#position3{
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+}
+
+#position4{
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+}
+
+#position5{
+    border-bottom: 5px solid black;
+}
+
+#position6{
+    border-right: 5px solid black;
+}
+
+#position7{
+    border-right: 5px solid black;
+}
+
 .position:hover{
-    background-color: gray;
+    background-color: gold;
+}
+
+body{
+    background-color: rgb(30, 121, 30);
+    margin-left: 45%;
+    margin-top: 4%;
 }
