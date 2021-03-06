@@ -72,23 +72,28 @@ const gameBoard = (function (){
         positionToggle.forEach((positon) => positon.addEventListener('click',_addSymbol));
         
         if(gameWon()){
-            console.log(currentPlayer.name);
             const body = document.querySelector('body');
             const winDiv = document.createElement('div');
             winDiv.setAttribute('id','message');
             winDiv.setAttribute('class','winningMessage');
             winDiv.textContent = `CONGRAGULATIONS ${currentPlayer.name.toUpperCase()} YOU WON!!!`;
             body.appendChild(winDiv);
+
+            const container = document.querySelector('#container');
+            container.style.pointerEvents = 'none';
+
         }
 
         if(gameDraw()&&gameWon()!=true){
-            console.log('It is a draw!');
             const body = document.querySelector('body');
             const winDiv = document.createElement('div');
             winDiv.setAttribute('id','message');
             winDiv.setAttribute('class','drawMessage');
             winDiv.textContent = `IT IS A DRAW`;
-            body.appendChild(winDiv);
+            body.appendChild(winDiv); 
+
+            const container = document.querySelector('#container');
+            container.style.pointerEvents = 'none';
         }
         displayController.displayBoard();
         _playerToggle();
@@ -140,6 +145,8 @@ const gameBoard = (function (){
             document.getElementById('message').remove();
         }
         displayController.displayBoard();
+        const container = document.querySelector('#container');
+        container.style.pointerEvents = 'auto';
     }
 
     const resetButton = document.querySelector('#restart');
@@ -181,17 +188,9 @@ const displayController = (function (){
         }
     };
 
-    const onWin = () => {
-
-    }
-
-    const onDraw = () => {
-
-    }
-
     const nameChange = document.querySelectorAll('.name');
     nameChange.forEach(button => button.addEventListener('click',playerNameChange));
-    return {displayBoard,onWin,onDraw};
+    return {displayBoard};
 })();
 
 
