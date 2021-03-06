@@ -10,6 +10,11 @@
     padding: 10px;
 }
 
+#restart:hover{
+    background-color: gold;
+    font-weight: bold;
+}
+
 #container{
     display:grid;
     grid-template-columns: repeat(3,100px);
@@ -81,6 +86,12 @@
 .name{
     margin:auto;
     padding: 10px;
+    border: none;
+}
+
+.name:hover{
+    background-color: gold;
+    font-weight: bold;
 }
 
 #names{
