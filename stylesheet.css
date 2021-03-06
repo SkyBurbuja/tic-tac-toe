@@ -7,12 +7,14 @@
 
 #restart{
     border: none;
+    padding: 10px;
 }
 
 #container{
     display:grid;
     grid-template-columns: repeat(3,100px);
-    
+    margin-left: 42%;
+    margin-top:0%;
 
 }
 
@@ -24,40 +26,118 @@
 #position1{
     border-bottom: 5px solid black;
     border-right: 5px solid black;
+    border-left: 5px solid black;
 }
 
 #position2{
     border-bottom: 5px solid black;
+    border-left: 5px solid black;
 }
 
 #position3{
-    border-bottom: 5px solid black;
+    border-top: 5px solid black;
     border-right: 5px solid black;
+    border-bottom: 5px solid black;
 }
 
 #position4{
-    border-bottom: 5px solid black;
-    border-right: 5px solid black;
+    border: 5px solid black;
 }
 
+
 #position5{
+    border-top: 5px solid black;
     border-bottom: 5px solid black;
+    border-left: 5px solid black;
 }
 
 #position6{
+    border-top: 5px solid black;
     border-right: 5px solid black;
 }
 
 #position7{
+    border-top: 5px solid black;
     border-right: 5px solid black;
+    border-left: 5px solid black;
+}
+#position8{
+    border-top: 5px solid black;
+    border-left: 5px solid black;
 }
 
 .position:hover{
     background-color: gold;
 }
 
+#buttons{
+    display: flex;
+    font-size: 50px;
+    align-items: center;
+    width: 100%;
+}
+
+.name{
+    margin:auto;
+    padding: 10px;
+}
+
+#names{
+    display: flex;
+    font-size: 60px;
+    align-items: center;
+    margin-top: 0%;
+}
+
+#nameOne{
+    margin: auto;
+    text-shadow: 2px 2px white;
+}
+
+#nameTwo{
+    margin:auto;
+    text-shadow: 2px 2px white;
+}
+
+
+
+#messageContainer{
+    display: flex;
+    font-size: 75px;
+}
+
+.winMessage{
+    margin: auto;
+}
+
+.drawMessage{
+    margin: auto;
+}
+
+header{
+    width:100%;
+    text-align: center;
+    vertical-align: top;
+    font-size: 75px;
+    
+}
+
+h1{
+        
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 body{
     background-color: rgb(30, 121, 30);
-    margin-left: 45%;
-    margin-top: 4%;
+    
+}
+
+#nameAndButtons{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+#vs{
+    position: absolute;
+    left:48%;
 }

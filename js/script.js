@@ -72,7 +72,7 @@ const gameBoard = (function (){
         positionToggle.forEach((positon) => positon.addEventListener('click',_addSymbol));
         
         if(gameWon()){
-            const body = document.querySelector('body');
+            const body = document.querySelector('#messageContainer');
             const winDiv = document.createElement('div');
             winDiv.setAttribute('id','message');
             winDiv.setAttribute('class','winningMessage');
@@ -85,7 +85,7 @@ const gameBoard = (function (){
         }
 
         if(gameDraw()&&gameWon()!=true){
-            const body = document.querySelector('body');
+            const body = document.querySelector('#messageContainer');
             const winDiv = document.createElement('div');
             winDiv.setAttribute('id','message');
             winDiv.setAttribute('class','drawMessage');
